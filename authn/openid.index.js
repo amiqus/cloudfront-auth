@@ -232,11 +232,11 @@ function mainProcess(event, context, callback) {
       } else {
         console.log("Authorizing user.");
 
-        if (request.uri.endsWith('/')) {
+        if (!request.uri.match(/\..+$/i)) {
           var requestUrl = request.uri;
 
           // Match url ending with '/' and replace with /index.html
-          var redirectUrl = requestUrl.replace(/\/$/, '\/index.html');
+          var redirectUrl = requestUrl.replace(/\/$/, '') + '/index.html';
 
           // Replace the received URI with the URI that includes the index page
           request.uri = redirectUrl;
